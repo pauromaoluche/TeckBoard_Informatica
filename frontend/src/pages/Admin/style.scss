@@ -1,0 +1,43 @@
+@import '@/assets/scss/_main';
+.Banner-login {
+    background-image: url('../../assets/img/baner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-login {
+    color: white;
+    width: 40%;
+    padding: 5px;
+    background-color: rgba(20, 20, 20, 0.7);
+    border-radius: 3%;
+    header h1 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .card-login {
+        background: none !important;
+        border: none;
+    }
+    input[type=email],
+    input[type=password] {
+        margin-bottom: 4%;
+        margin-top: 3%;
+        background-color: rgba(10, 10, 10, 0.9);
+        border: none;
+        height: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: white;
+    }
+    .btnRegister {
+        width: 100%;
+    }
+}
