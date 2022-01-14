@@ -4,11 +4,11 @@
             <SideBarComponent/>
         </div>
         <div class="content-right">
-            <dvi class="nav-bar">
+            <div>
                 <NavBarComponent/>
-            </dvi>
+            </div>
             <div class="pages">
-                
+                <slot name="slot-pages"></slot>
             </div>
         </div>
     

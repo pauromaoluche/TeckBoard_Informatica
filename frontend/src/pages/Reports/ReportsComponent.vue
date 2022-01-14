@@ -5,11 +5,8 @@
             <!-- Joga o conteudo pro slot-pages que esta dentro do dashboard -->
             <div slot="slot-pages" class="content-pages">
                 <header class="title-pages">
-                    <p>Inicio</p>
+                    <p>Relatórios</p>
                 </header>
-                
-                <CardsComponent/>
-
             </div>
         </DashboardComponent>
     </div>
@@ -18,15 +15,16 @@
 <script>
 /* dashboard vai estar em todas paginas, então devemos importalo */
 import DashboardComponent from '../Dashboard/DashboardComponent';
-import CardsComponent from '../../components/CardsComponent';
 
 export default {
+    name: 'ReportsComponent',
     components: {
         DashboardComponent,
-        CardsComponent,
     }
 
 }
 </script>
 
-<style lang="scss" src="./style.scss" scoped/>
+<style scoped>
+
+</style>
