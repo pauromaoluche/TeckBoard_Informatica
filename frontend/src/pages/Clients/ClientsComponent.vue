@@ -1,30 +1,82 @@
 <template>
-    <div>
-        <!-- O componente DashboardComponent esta sendo renderizado -->
-        <DashboardComponent>
-            <!-- Joga o conteudo pro slot-pages que esta dentro do dashboard -->
-            <div slot="slot-pages" class="content-pages">
-                <header class="title-pages">
-                    <p>Clientes</p>
-                </header>
+  <div>
+    <!-- O componente DashboardComponent esta sendo renderizado -->
+    <DashboardComponent>
+      <!-- Joga o conteudo pro slot-pages que esta dentro do dashboard -->
+
+      <div slot="slot-pages" class="content-pages">
+        <header class="title-pages">
+          <b-breadcrumb class="breadcrumb" :items="breadcrumb"></b-breadcrumb>
+          <hr />
+        </header>
+        <div>
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <div>
+                <ListsComponent :data="users" />
+              </div>
             </div>
-        </DashboardComponent>
-    </div>
+          </div>
+        </div>
+      </div>
+    </DashboardComponent>
+  </div>
 </template>
 
 <script>
 /* dashboard vai estar em todas paginas, então devemos importalo */
-import DashboardComponent from '../Dashboard/DashboardComponent';
+import DashboardComponent from "../Dashboard/DashboardComponent";
+import ListsComponent from "../../components/ListsComponent";
+const axios = require("axios");
 
 export default {
-    name: 'ClientsComponent',
-    components: {
-        DashboardComponent,
-    }
+  name: "ClientsComponent",
 
-}
+  data() {
+    return {
+      users: [],
+      breadcrumb: [
+        {
+          text: "Home",
+          to: { name: "home" },
+        },
+        {
+          text: "Clientes",
+          to: { name: "products" },
+        },
+      ],
+    };
+  },
+
+  mounted() {
+    /* chama um metodo do proprio componente */
+    this.getUsers();
+  },
+
+  methods: {
+    async getUsers() {
+      const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+
+      if (response.status == 200) {
+        console.log(response.data);
+        this.users = response.data;
+      } else {
+        console.error("Erro ao consultar a API");
+      }
+
+      console.log(response);
+    },
+  },
+
+  components: {
+    DashboardComponent,
+    ListsComponent,
+  },
+};
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.main {
+  background: #e9ecef;
+}
 </style>

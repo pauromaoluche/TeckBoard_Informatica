@@ -6,8 +6,23 @@
     
     .content-pages {
         padding: 15px;
+        min-height: 100vh;
     }
     
     .title-pages {
         font-size: 25px;
+    }
+    
+    .breadcrumb {
+        padding-top: 15px;
+        width: 100%;
+        a,
+        span {
+            font-size: 18px;
+        }
+        .active::before {
+            content: '/';
+            font-size: 24px;
+            float: unset;
+        }
     }
