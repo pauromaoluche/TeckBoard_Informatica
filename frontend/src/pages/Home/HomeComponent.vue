@@ -14,7 +14,7 @@
                 :type="'Clientes'"
                 :percentage="'7%'"
                 :icon="'fa-users'"
-                :qtd="'150'"
+                :qtd="clients.length"
               />
             </div>
             <div class="col-12 col-sm-3">
@@ -22,7 +22,7 @@
                 :type="'Produtos'"
                 :percentage="'22%'"
                 :icon="'fa-store'"
-                :qtd="'1350'"
+                :qtd="products.length"
               />
             </div>
             <div class="col-12 col-sm-3">
@@ -30,7 +30,7 @@
                 :type="'Pedidos'"
                 :percentage="'15%'"
                 :icon="'fa-box'"
-                :qtd="'78'"
+                :qtd="products.length"
               />
             </div>
             <div class="col-12 col-sm-3">
@@ -38,7 +38,7 @@
                 :type="'Relatórios'"
                 :percentage="'2'"
                 :icon="'fa-chart-bar'"
-                :qtd="'23'"
+                :qtd="products.length"
               />
             </div>
           </div>
@@ -47,10 +47,18 @@
         <div>
           <div class="row">
             <div class="col-12 col-md-6">
-              <ListsComponent :data="users" description="Clientes" :columns="['Nome', 'E-mail', 'Cidade', 'Endereço']"/>
+              <ListsComponent
+                :data="clients"
+                description="Clientes"
+                :columns="['Nome', 'E-mail']"
+              />
             </div>
             <div class="col-12 col-md-6">
-              <ListsComponent :data="users" description="Produtos" :columns="['Remetente', 'Nome', 'Status', 'Data' ]" />
+              <ListsComponent
+                :data="products"
+                description="Produtos"
+                :columns="['Nome', 'Valor']"
+              />
             </div>
           </div>
         </div>
@@ -60,7 +68,6 @@
 </template>
 
 <script>
-
 /* dashboard vai estar em todas paginas, então devemos importalo */
 import DashboardComponent from "../Dashboard/DashboardComponent";
 import CardsComponent from "../../components/CardsComponent";
@@ -72,27 +79,29 @@ export default {
 
   data() {
     return {
-      users: [],
+      clients: [],
+      products: [],
     };
   },
 
   mounted() {
     /* chama um metodo do proprio componente */
-    this.getUsers();
+    this.getData();
+    console.log(this.$route.name);
+
+
   },
 
   methods: {
-    async getUsers() {
-      const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-
-      if (response.status == 200) {
-        console.log(response.data);
-        this.users = response.data;
-      } else {
-        console.error("Erro ao consultar a API");
+    async getData() {
+      try {
+        let client = await axios.get("dashboard/clients");
+        let product = await axios.get("dashboard/products");
+        this.clients = client.data.clients;
+        this.products = product.data.products;
+      } catch (error) {
+        console.error("Erro ao consultar a API" + error.response.status);
       }
-
-      console.log(response);
     },
   },
   components: {

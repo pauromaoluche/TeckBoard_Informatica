@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col-12 col-md-12">
               <div>
-                <ListsComponent :data="users" />
+                <ListsComponent :data="clients" description="Clientes" :columns="['Nome', 'E-mail', 'Cidade', 'Endereço']" />
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@ export default {
 
   data() {
     return {
-      users: [],
+      clients: [],
       breadcrumb: [
         {
           text: "Home",
@@ -51,15 +51,16 @@ export default {
   mounted() {
     /* chama um metodo do proprio componente */
     this.getUsers();
+    
   },
 
   methods: {
     async getUsers() {
-      const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+      const response = await axios.get("dashboard/clients");
 
       if (response.status == 200) {
         console.log(response.data);
-        this.users = response.data;
+        this.clients = response.data.clients;
       } else {
         console.error("Erro ao consultar a API");
       }

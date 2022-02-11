@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+import axios from 'axios';
 import bootstrap from './bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -15,16 +16,14 @@ import ClientsComponent from './pages/Clients/ClientsComponent';
 import OrdersComponent from './pages/Orders/OrdersComponent';
 import ReportsComponent from './pages/Reports/ReportsComponent';
 
-
-
-
-
-
 Vue.config.productionTip = false
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 Vue.use(bootstrap);
-Vue.use(BootstrapVue),
-    Vue.use(IconsPlugin)
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+
+
+axios.defaults.baseURL = 'http://localhost:8000/api';
 
 /* criou as rotas */
 const routes = [

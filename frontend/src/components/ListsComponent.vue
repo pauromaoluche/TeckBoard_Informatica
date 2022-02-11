@@ -1,7 +1,12 @@
 <template>
   <div class="Lists card">
     <div class="top">
-      <p><strong>{{description}}  <b-badge pill variant="primary">{{ data.length }}</b-badge></strong></p>
+      <p>
+        <strong
+          >{{ description }}
+          <b-badge class="countValue" pill>{{ data.length }}</b-badge></strong
+        >
+      </p>
     </div>
 
     <div class="content">
@@ -9,19 +14,22 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">{{columns[0]}}</th>
-            <th scope="col">{{columns[1]}}</th>
-            <th scope="col">{{columns[2]}}</th>
-            <th scope="col">{{columns[3]}}</th>
+            <th v-for="(colum, index) in columns" v-bind:key="index" scope="col">
+              {{ colum }}
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in data" :key="user.id">
-            <th scope="row">{{ user.id }}</th>
-            <td><p class="users">{{ user.name }}</p></td>
-            <td><p class="users">{{ user.email }}</p></td>
-            <td><p class="users">{{ user.address['city']}}</p></td>
-            <td><p class="users">Rua: {{ user.address['street']}}</p></td>
+          <tr v-for="item in data" :key="item.id">
+            <th scope="row">
+              <p>{{ item.id }}</p>
+            </th>
+            <td scope="row">{{ item.name }}</td>
+            <td>
+              <p class="users">
+                {{ description == "Clientes" ? item.email : item.value }}
+              </p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -33,11 +41,23 @@
 export default {
   name: "ListsComponent",
 
-  props:{
+  mounted() {
+    this.validClients();
+  },
+
+  methods: {
+      async validClients(){
+    if(this.$route.name == 'clients'){
+        alert('rota cliente');
+    }
+  },
+},
+
+  props: {
     data: Array,
     description: String,
     columns: {},
-  }
+  },
 };
 </script>
 
@@ -48,8 +68,13 @@ export default {
   padding: 10px;
   border-radius: 10px;
 
-  .users{
+  .users {
     font-size: 13px;
+  }
+
+  .countValue {
+    background: #007bff;
+    margin-left: 10px;
   }
 }
 </style>
