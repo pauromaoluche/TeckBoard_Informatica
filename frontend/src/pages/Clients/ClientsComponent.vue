@@ -10,10 +10,19 @@
           <hr />
         </header>
         <div>
+
           <div class="row">
             <div class="col-12 col-md-12">
               <div>
-                <ListsComponent :data="clients" description="Clientes" :columns="['Nome', 'E-mail', 'Cidade', 'Endereço']" />
+                <ListsComponent
+                  :data="clients"
+                  description="Clientes"
+                  :columns="
+                    [{nameColumn: 'Nome', valueColumn: 'name'}, {nameColumn: 'E-mail', valueColumn: 'email'},
+                    {nameColumn: 'Telefone', valueColumn: 'phone'}, {nameColumn: 'Estado', valueColumn: 'state'},
+                    {nameColumn: 'Cidade', valueColumn: 'city'}, {nameColumn: 'Rua', valueColumn: 'street'},
+                    {nameColumn: 'Numero', valueColumn: 'number'} ]"
+                />
               </div>
             </div>
           </div>
@@ -31,7 +40,6 @@ const axios = require("axios");
 
 export default {
   name: "ClientsComponent",
-
   data() {
     return {
       clients: [],
@@ -51,21 +59,20 @@ export default {
   mounted() {
     /* chama um metodo do proprio componente */
     this.getUsers();
-    
+  },
+
+  computed: {
+    columTable() {
+      return this.$store.state.colum;
+    },
   },
 
   methods: {
     async getUsers() {
-      const response = await axios.get("dashboard/clients");
-
-      if (response.status == 200) {
-        console.log(response.data);
+      axios.get("dashboard/clients").then((response) => {
         this.clients = response.data.clients;
-      } else {
-        console.error("Erro ao consultar a API");
-      }
-
-      console.log(response);
+        this.$store.commit("incrementsColum");
+      });
     },
   },
 

@@ -50,14 +50,14 @@
               <ListsComponent
                 :data="clients"
                 description="Clientes"
-                :columns="['Nome', 'E-mail']"
+                :columns="[ {nameColumn: 'Nome', valueColumn: 'name'}, {nameColumn: 'E-mail', valueColumn: 'email'} ]"
               />
             </div>
             <div class="col-12 col-md-6">
               <ListsComponent
                 :data="products"
                 description="Produtos"
-                :columns="['Nome', 'Valor']"
+                :columns="[ {nameColumn: 'Nome', valueColumn: 'name'}, {nameColumn: 'Valor', valueColumn: 'value'} ]"
               />
             </div>
           </div>
@@ -81,27 +81,31 @@ export default {
     return {
       clients: [],
       products: [],
+      setDatas: [],
     };
   },
 
   mounted() {
     /* chama um metodo do proprio componente */
     this.getData();
-    console.log(this.$route.name);
+    console.log(this.clients);
+    this.$store.commit("incrementsColum");
+  },
 
-
+  computed: {
+    columTable() {
+      return this.$store.state.colum;
+    },
   },
 
   methods: {
     async getData() {
-      try {
-        let client = await axios.get("dashboard/clients");
-        let product = await axios.get("dashboard/products");
-        this.clients = client.data.clients;
-        this.products = product.data.products;
-      } catch (error) {
-        console.error("Erro ao consultar a API" + error.response.status);
-      }
+      axios.get("dashboard/products").then((response) => {
+        this.products = response.data.products;
+      });
+      axios.get("dashboard/clients").then((response) => {
+        this.clients = response.data.clients;
+      });
     },
   },
   components: {

@@ -15,20 +15,15 @@
           <tr>
             <th scope="col">#</th>
             <th v-for="(colum, index) in columns" v-bind:key="index" scope="col">
-              {{ colum }}
+              {{ colum.nameColumn }}
             </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in data" :key="item.id">
-            <th scope="row">
-              <p>{{ item.id }}</p>
-            </th>
-            <td scope="row">{{ item.name }}</td>
-            <td>
-              <p class="users">
-                {{ description == "Clientes" ? item.email : item.value }}
-              </p>
+            <td scope="row">{{ item.id }}</td>
+            <td scope="row" v-for="(colum, index) in columns" v-bind:key="index">
+              {{ item[colum.valueColumn] }}
             </td>
           </tr>
         </tbody>
@@ -43,20 +38,27 @@ export default {
 
   mounted() {
     this.validClients();
+    console.log(this.data.clients);
+  },
+
+  computed: {
+    columTable() {
+      return this.$store.state.colum;
+    },
   },
 
   methods: {
-      async validClients(){
-    if(this.$route.name == 'clients'){
-        alert('rota cliente');
-    }
+    async validClients() {
+      if (this.$route.name == "clients") {
+        this.$store.commit("incrementsColum");
+      }
+    },
   },
-},
 
   props: {
     data: Array,
     description: String,
-    columns: {},
+    columns: Array,
   },
 };
 </script>
