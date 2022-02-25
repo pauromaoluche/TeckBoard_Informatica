@@ -17,7 +17,7 @@
                 <router-link class="nav-link text-white" :to="{name: 'orders'}"><i class="fa fa-box"></i> Pedidos</router-link>
             </li>
             <li>
-                <router-link class="nav-link text-white" :to="{name: 'products'}"><i class="fa fa-store"></i> Produtos</router-link>
+                <router-link class="nav-link text-white" :to="{name: 'services'}"><i class="fa fa-store"></i> Serviços</router-link>
             </li>
             <li>
                 <router-link class="nav-link text-white" :to="{name: 'clients'}"><i class="fa fa-users"></i> Clientes</router-link>

@@ -22,7 +22,7 @@
                 :type="'Produtos'"
                 :percentage="'22%'"
                 :icon="'fa-store'"
-                :qtd="products.length"
+                :qtd="services.length"
               />
             </div>
             <div class="col-12 col-sm-3">
@@ -30,7 +30,7 @@
                 :type="'Pedidos'"
                 :percentage="'15%'"
                 :icon="'fa-box'"
-                :qtd="products.length"
+                :qtd="services.length"
               />
             </div>
             <div class="col-12 col-sm-3">
@@ -38,7 +38,7 @@
                 :type="'Relatórios'"
                 :percentage="'2'"
                 :icon="'fa-chart-bar'"
-                :qtd="products.length"
+                :qtd="services.length"
               />
             </div>
           </div>
@@ -55,9 +55,9 @@
             </div>
             <div class="col-12 col-md-6">
               <ListsComponent
-                :data="products"
+                :data="services"
                 description="Produtos"
-                :columns="[ {nameColumn: 'Nome', valueColumn: 'name'}, {nameColumn: 'Valor', valueColumn: 'value'} ]"
+                :columns="[ {nameColumn: 'Serviço', valueColumn: 'service'}, {nameColumn: 'Tipo', valueColumn: 'type'} ]"
               />
             </div>
           </div>
@@ -80,7 +80,7 @@ export default {
   data() {
     return {
       clients: [],
-      products: [],
+      services: [],
       setDatas: [],
     };
   },
@@ -100,8 +100,8 @@ export default {
 
   methods: {
     async getData() {
-      axios.get("dashboard/products").then((response) => {
-        this.products = response.data.products;
+      axios.get("dashboard/services").then((response) => {
+        this.services = response.data.services;
       });
       axios.get("dashboard/clients").then((response) => {
         this.clients = response.data.clients;
