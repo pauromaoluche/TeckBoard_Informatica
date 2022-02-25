@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemovePasswToClientsTable extends Migration
+class AlterCityToClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class RemovePasswToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            //
+            $table->dropColumn('city');
         });
     }
 
@@ -26,7 +26,7 @@ class RemovePasswToClientsTable extends Migration
     public function down()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropColumn('passw');
+            $table->integer('city')->length(4)->after('state');
         });
     }
 }

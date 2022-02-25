@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('auth')->group(base_path('routes/api/auth.php'));
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

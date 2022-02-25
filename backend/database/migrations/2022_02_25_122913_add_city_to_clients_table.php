@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropPasswToClientsTable extends Migration
+class AddCityToClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class DropPasswToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            //
+            $table->int('city')->length(4)->after('state');
         });
     }
 
@@ -26,7 +26,7 @@ class DropPasswToClientsTable extends Migration
     public function down()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropColumn('passw');
+            //
         });
     }
 }
