@@ -6,12 +6,12 @@ header('Access-Control-Aloow-Origin: *');
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\Client;
-use App\Models\Models\Product;
+use App\Models\Models\Service;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function Client()
+    public function Client(Client $client)
     {
 
         /* laravel promove uma query que busca os dados mais facil */
@@ -22,20 +22,11 @@ class HomeController extends Controller
         ]);
     }
 
-    public function Product()
+    public function Service()
     {
-        // $products = Product::all();
-        $products = [
-            [
-                'id' => 1,
-                'name' => 'video game',
-                'value' => '10,20'
-            ]
-        ];
-
-
+        $services = Service::all();
         return response()->json([
-            'products' => $products,
+            'services' => $services,
         ]);
     }
 }

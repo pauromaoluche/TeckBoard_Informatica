@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('dashboard')->group(base_path('routes/api/dashboard.php'));
+Route::prefix('services')->group(base_path('routes/api/service.php'));
+Route::prefix('clients')->group(base_path('routes/api/client.php'));
 
