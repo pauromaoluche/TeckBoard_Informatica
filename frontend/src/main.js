@@ -13,8 +13,10 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
 import HomeComponent from './pages/Home/HomeComponent';
 import AdminComponent from './pages/Admin/AdminComponent';
-import ProductsComponent from './pages/Products/ProductsComponent';
+import ServicesComponent from './pages/Services/ServicesComponent';
+import ServicesAddComponent from './pages/Services/ServicesAddComponent'
 import ClientsComponent from './pages/Clients/ClientsComponent';
+import ClientsAddComponent from './pages/Clients/ClientsAddComponent';
 import OrdersComponent from './pages/Orders/OrdersComponent';
 import ReportsComponent from './pages/Reports/ReportsComponent';
 
@@ -32,8 +34,26 @@ axios.defaults.baseURL = 'http://localhost:8000/api';
 const routes = [
     { path: '/', name: 'home', component: HomeComponent },
     { path: '/admin', name: 'admin', component: AdminComponent },
-    { path: '/produtos', name: 'products', component: ProductsComponent },
-    { path: '/clientes', name: 'clients', component: ClientsComponent },
+    {
+        path: '/servicos',
+        name: 'services',
+        component: ServicesComponent,
+        children: [{
+            path: 'adicionar',
+            name: 'add',
+            component: ServicesAddComponent,
+        }]
+    },
+    {
+        path: '/clientes',
+        name: 'clients',
+        component: ClientsComponent,
+        children: [{
+            path: 'adicionar',
+            name: 'add',
+            component: ClientsAddComponent,
+        }]
+    },
     { path: '/pedidos', name: 'orders', component: OrdersComponent },
     { path: '/relatorios', name: 'reports', component: ReportsComponent },
 ]
