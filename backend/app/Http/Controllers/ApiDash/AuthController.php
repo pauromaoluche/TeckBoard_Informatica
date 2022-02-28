@@ -5,7 +5,9 @@ namespace App\Http\Controllers\ApiDash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 class AuthController extends Controller
 {
     public function Login(LoginRequest $request)
@@ -25,7 +27,12 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL()*60
+            'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function Me()
+    {
+        return response()->json(auth('api')->user());
     }
 }
