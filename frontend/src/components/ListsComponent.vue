@@ -36,22 +36,10 @@
 export default {
   name: "ListsComponent",
 
-  mounted() {
-    this.validClients();
-    console.log(this.data.clients);
-  },
 
   computed: {
     columTable() {
       return this.$store.state.colum;
-    },
-  },
-
-  methods: {
-    async validClients() {
-      if (this.$route.name == "clients") {
-        this.$store.commit("incrementsColum");
-      }
     },
   },
 
